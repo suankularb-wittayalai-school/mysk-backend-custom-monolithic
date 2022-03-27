@@ -5,7 +5,6 @@ from typing import List, Optional
 from student_teacher.teacher import Teacher
 from student_teacher.student import Student
 
-# from subject.subjects import Subject
 from schedule.schedule import Schedule
 from student_teacher.contacts import Contact
 
@@ -17,5 +16,5 @@ class Classroom(BaseModel):
     term: int
     students: List[Student]
     advisors: List[Teacher]
-    schedule: Schedule 
+    schedule: Schedule
     contacts: List[Contact]
