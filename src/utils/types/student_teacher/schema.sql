@@ -48,7 +48,7 @@ CREATE TABLE Contact
     value TEXT NOT NULL,
 );
 
-CREATE TABLE People
+CREATE TABLE Person
 (
     id INTEGER PRIMARY KEY,
     prefix_th int CHECK(prefix_th >= 5 AND prefix_th < 9) NOT NULL REFERENCES PrefixType(id),
@@ -67,7 +67,7 @@ CREATE TABLE People
 CREATE TABLE Teacher
 (
     id INTEGER PRIMARY KEY,
-    people_id INTEGER NOT NULL REFERENCES People(id),
+    people_id INTEGER NOT NULL REFERENCES Person(id),
     teacher_id TEXT NOT NULL
 );
 
@@ -81,7 +81,7 @@ CREATE TABLE Teacher_SubjectGroup
 CREATE TABLE Student
 (
     id INTEGER PRIMARY KEY,
-    people_id INTEGER NOT NULL REFERENCES People(id),
+    people_id INTEGER NOT NULL REFERENCES Person(id),
     student_id TEXT NOT NULL
 );
 

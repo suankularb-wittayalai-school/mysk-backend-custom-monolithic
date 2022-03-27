@@ -1,4 +1,4 @@
-from .people import People
+from .people import Person
 
 from pydantic import BaseModel
 from typing import List, Optional
@@ -10,6 +10,6 @@ class Teacher(BaseModel):
     Teacher model
     """
     id: str
-    people: People
+    people: Person
     teacher_id: str
     subject_groups: List[SubjectGroup]

@@ -5,7 +5,7 @@ type Contact {
     value: String!
 }
 
-type People {
+type Person {
     id: ID!
     prefix_th: "นาย" | "นางสาว" | "นาง" | "เด็กชาย"
     prefix_en: "Mr." | "Mrs." | "Ms." | "Master"
@@ -22,14 +22,14 @@ type People {
 
 type Teacher {
     id: ID!
-    people: People!
+    people: Person!
     teacher_id: String!
     subjectGroup: SubjectGroup!
 }
 
 type Student {
     id: ID!
-    people: People!
+    people: Person!
     student_id: String!
 }
 
@@ -38,6 +38,6 @@ type query {
     students: [Student]!
     teacher: Teacher
     student: Student
-    person: People
-    people: [People]!
+    person: Person
+    people: [Person]!
 }

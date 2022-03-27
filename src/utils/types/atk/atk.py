@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import List, Optional
 from enum import Enum
 
-from student_teacher.people import People
+from student_teacher.people import Person
 
 
 class ATKMethodEnum(str, Enum):
@@ -14,7 +14,7 @@ class ATKMethodEnum(str, Enum):
 
 class AtkRecord(BaseModel):
     id: int
-    tester: People
+    tester: Person
     result: bool
     date: str
     method: ATKMethodEnum

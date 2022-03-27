@@ -28,7 +28,7 @@ class EnglishPrefix(str, Enum):
     Master = "Master."
 
 
-class People(BaseModel):
+class Person(BaseModel):
     id: int
     prefix_th: ThaiPrefix
     prefix_en: EnglishPrefix

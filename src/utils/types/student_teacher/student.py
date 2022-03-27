@@ -1,4 +1,4 @@
-from .people import People
+from .people import Person
 
 from pydantic import BaseModel
 from typing import List, Optional
@@ -8,5 +8,5 @@ class Student(BaseModel):
     Student model
     """
     id: str
-    people: People
+    people: Person
     std_id: str

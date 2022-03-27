@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import List, Optional
 
-from student_teacher.people import People
+from student_teacher.people import Person
 
 class VaccineProvider(BaseModel):
     id: int
@@ -9,7 +9,7 @@ class VaccineProvider(BaseModel):
 
 class Vaccine(BaseModel):
     id: int
-    taker: People
+    taker: Person
     dose: int
     provider: VaccineProvider
     date: str
