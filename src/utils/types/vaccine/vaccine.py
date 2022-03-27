@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import List, Optional
 
-from utils.types.student_teacher.person import Person
+from student_teacher.person import Person
 
 
 class VaccineProvider(BaseModel):

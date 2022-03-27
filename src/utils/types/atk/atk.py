@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import List, Optional
 from enum import Enum
 
-from utils.types.student_teacher.person import Person
+from student_teacher.person import Person
 
 
 class ATKMethodEnum(str, Enum):

@@ -2,17 +2,15 @@ from enum import Enum
 from pydantic import BaseModel
 from typing import List, Optional
 
-from subject.subjects import Subject
 from student_teacher.teacher import Teacher
+from subject.subjects import Subject
 
-class ScheduleItem(BaseModel):
+
+class RoomSubject(BaseModel):
     id: int
-    subject: Optional[Subject]
-    teacher: Teacher
+    subject: Subject
+    teachers: List[Teacher]
     coteachers: Optional[List[Teacher]] = None
-    day: int
-    start_time: int
-    duration: int
-    room: str
-    
-
+    ggc_code: str
+    ggc_link: str
+    gg_meet_link: str

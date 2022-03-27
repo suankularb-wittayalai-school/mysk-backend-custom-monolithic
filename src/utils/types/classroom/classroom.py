@@ -8,6 +8,8 @@ from student_teacher.student import Student
 from schedule.schedule import Schedule
 from student_teacher.contacts import Contact
 
+from subject.room_subject import RoomSubject
+
 
 class Classroom(BaseModel):
     id: int
@@ -18,3 +20,4 @@ class Classroom(BaseModel):
     advisors: List[Teacher]
     schedule: Schedule
     contacts: List[Contact]
+    subjects: List[RoomSubject]
