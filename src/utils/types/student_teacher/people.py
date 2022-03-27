@@ -21,6 +21,7 @@ class EnglishPrefix(str, Enum):
     Mr = "Mr."
     Mrs = "Mrs."
     Miss = "Miss."
+    Master = "Master."
 
 
 
