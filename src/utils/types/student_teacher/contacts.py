@@ -7,11 +7,14 @@ class ContactType(str, Enum):
     """
     Contact type
     """
-    Phone = "phone"
-    Email = "email"
-    Facebook = "facebook"
-    Line = "line"
-    Other = "other"
+    Phone = "Phone"
+    Email = "Email"
+    Facebook = "Facebook"
+    Line = "Line"
+    Instagram = "Instagram"
+    Website = "Website"
+    Discord = "Discord"
+    Other = "Other"
 
 class Contact(BaseModel):
     id: str

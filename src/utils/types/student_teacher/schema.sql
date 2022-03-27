@@ -13,7 +13,7 @@ VALUES
     (1, 'Mr.'),
     (2, 'Mrs.'),
     (3, 'Ms.'),
-    (4, 'Master'),
+    (4, 'Master.'),
     (5, 'เด็กชาย'),
     (6, 'นาย'),
     (7, 'นาง'),
@@ -36,7 +36,8 @@ VALUES
     (5, 'Instagram'),
     (6, 'Twitter'),
     (7, 'Website'),
-    (8, 'Other');
+    (8, 'Discord'),
+    (9, 'Other');
 
 
 CREATE TABLE Contact
@@ -63,7 +64,7 @@ CREATE TABLE People
     contact int REFERENCES Contact(id),
 );
 
-CREATE TABLE Teacher 
+CREATE TABLE Teacher
 (
     id INTEGER PRIMARY KEY,
     people_id INTEGER NOT NULL REFERENCES People(id),
