@@ -2,10 +2,10 @@ from student_teacher.student import Student
 from student_teacher.teacher import Teacher
 
 
-from pydantic import BaseModel, validator
+from pydantic import BaseModel
 from typing import List, Optional
-from enum import Enum, IntEnum
-from datetime import datetime, date
+from enum import Enum
+from datetime import datetime
 
 class Permission(BaseModel):
     """

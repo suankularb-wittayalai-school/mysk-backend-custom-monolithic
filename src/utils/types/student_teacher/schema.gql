@@ -1,7 +1,7 @@
 type Contact {
     id: ID!
     name: String!
-    type: "Phone" | "Email" | "Facebook" | "Instagram" | "Twitter" | "Website" | "Other"
+    type: "Phone" | "Email" | "Facebook" | "Instagram" | "Twitter" | "Website" | "Discord" | "Other"
     value: String!
 }
 

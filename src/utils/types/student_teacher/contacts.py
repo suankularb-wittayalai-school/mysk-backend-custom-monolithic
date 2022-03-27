@@ -3,10 +3,12 @@ from typing import List, Optional
 from datetime import datetime, date
 from enum import Enum, IntEnum
 
+
 class ContactType(str, Enum):
     """
     Contact type
     """
+
     Phone = "Phone"
     Email = "Email"
     Facebook = "Facebook"
@@ -15,6 +17,7 @@ class ContactType(str, Enum):
     Website = "Website"
     Discord = "Discord"
     Other = "Other"
+
 
 class Contact(BaseModel):
     id: str
