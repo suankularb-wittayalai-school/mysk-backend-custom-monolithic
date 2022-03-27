@@ -5,31 +5,33 @@ from enum import Enum, IntEnum
 
 from contacts import Contact
 
+
 class ThaiPrefix(str, Enum):
     """
     Thai prefix for name
     """
+
     Master = "เด็กชาย"
     Mr = "นาย"
     Mrs = "นาง"
     Miss = "นางสาว"
 
+
 class EnglishPrefix(str, Enum):
     """
     English prefix for name
     """
+
     Mr = "Mr."
     Mrs = "Mrs."
     Miss = "Miss."
     Master = "Master."
 
 
-
-
 class People(BaseModel):
     id: int
     prefix_th: ThaiPrefix
-    prefix_en:  EnglishPrefix
+    prefix_en: EnglishPrefix
     first_name_th: str
     last_name_th: str
     middle_name_th: Optional[str]

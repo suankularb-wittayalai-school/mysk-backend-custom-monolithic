@@ -4,16 +4,19 @@ from enum import Enum
 
 from student_teacher.people import People
 
-class MethodEnum(str, Enum):
+
+class ATKMethodEnum(str, Enum):
     oral = "oral"
-    injection = "injection"
+    rt = "rtpcr"
+    nusal = "nusal"
+    other = "other"
+
 
 class AtkRecord(BaseModel):
     id: int
     tester: People
     result: bool
     date: str
-    method: MethodEnum
+    method: ATKMethodEnum
     place: str
-    evidence: str 
-    
+    evidence: str
