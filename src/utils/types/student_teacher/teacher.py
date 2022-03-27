@@ -1,4 +1,4 @@
-from .person import Person
+from student_teacher.person import Person
 
 from pydantic import BaseModel
 from typing import List, Optional
