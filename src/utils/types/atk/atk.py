@@ -8,7 +8,7 @@ from student_teacher.people import Person
 class ATKMethodEnum(str, Enum):
     oral = "oral"
     rt = "rtpcr"
-    nusal = "nusal"
+    nasal = "nasal"
     other = "other"
 
 
