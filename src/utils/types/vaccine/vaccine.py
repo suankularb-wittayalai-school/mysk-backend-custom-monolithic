@@ -1,11 +1,13 @@
 from pydantic import BaseModel
 from typing import List, Optional
 
-from student_teacher.people import Person
+from utils.types.student_teacher.person import Person
+
 
 class VaccineProvider(BaseModel):
     id: int
     name: str
+
 
 class Vaccine(BaseModel):
     id: int
