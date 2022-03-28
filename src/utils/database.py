@@ -10,23 +10,32 @@ from sqlalchemy import (
     Boolean,
     Constraint,
 )
-from sqlalchemy import inspect
+from enum import Enum
 from dotenv import load_dotenv
+import os
+
+# from utils.types.student_teacher.contacts import ContactType
 
 # from types.student_teacher.person import Person
-import os
 
 load_dotenv()
 
 metadata = MetaData()
 engine = create_engine(os.environ.get("DATABASE_URL"))
 
-contact_types = Table(
-    "contact_types",
+contact_type = Table(
+    "contact_type",
     metadata,
     Column("id", Integer, primary_key=True),
     Column("name", String(50), nullable=False),
-    Column("type", String(50), nullable=False),
+)
+
+contact = Table(
+    "contact",
+    metadata,
+    Column("id", Integer, primary_key=True),
+    Column("name", String(50), nullable=False),
+    Column("type", Integer, ForeignKey("contact_type.id"), nullable=False),
     Column("value", String(50), nullable=False),
 )
 
@@ -35,7 +44,7 @@ person_contact_types = Table(
     metadata,
     Column("id", Integer, primary_key=True),
     Column("person_id", Integer, ForeignKey("person.id")),
-    Column("contact_type_id", Integer, ForeignKey("contact_types.id")),
+    Column("contact_type_id", Integer, ForeignKey("contact.id")),
 )
 
 person = Table(
@@ -71,3 +80,25 @@ teacher = Table(
 )
 
 metadata.create_all(engine)
+
+# add contact type to database if none exits
+
+# query current contact types
+contact_types = engine.execute("SELECT * FROM contact_type").fetchall()
+
+if contact_types == []:
+    # add contact types
+    engine.execute(
+        contact_type.insert(),
+        [
+            {"name": "Phone"},
+            {"name": "Email"},
+            {"name": "Facebook"},
+            {"name": "Line"},
+            {"name": "Instagram"},
+            {"name": "Twitter"},
+            {"name": "Website"},
+            {"name": "Discord"},
+            {"name": "Other"},
+        ],
+    )

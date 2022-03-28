@@ -6,7 +6,7 @@ from enum import Enum, IntEnum
 from student_teacher.contacts import Contact
 
 
-class ThaiPrefix(str, Enum):
+class ThaiPrefix(Enum):
     """
     Thai prefix for name
     """
@@ -17,7 +17,7 @@ class ThaiPrefix(str, Enum):
     Miss = "นางสาว"
 
 
-class EnglishPrefix(str, Enum):
+class EnglishPrefix(Enum):
     """
     English prefix for name
     """

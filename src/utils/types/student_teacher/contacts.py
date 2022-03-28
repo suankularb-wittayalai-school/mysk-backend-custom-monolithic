@@ -4,7 +4,7 @@ from datetime import datetime, date
 from enum import Enum, IntEnum
 
 
-class ContactType(str, Enum):
+class ContactType(Enum):
     """
     Contact type
     """
