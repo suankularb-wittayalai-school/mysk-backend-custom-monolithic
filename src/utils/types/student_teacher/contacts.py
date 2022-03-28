@@ -24,3 +24,9 @@ class Contact(BaseModel):
     name: str
     type: ContactType
     value: str
+
+
+class QueryContact(BaseModel):
+    name: str
+    type: ContactType
+    value: str

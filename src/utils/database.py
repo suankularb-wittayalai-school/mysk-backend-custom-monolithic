@@ -21,7 +21,9 @@ import os
 load_dotenv()
 
 metadata = MetaData()
-engine = create_engine(os.environ.get("DATABASE_URL"))
+engine = create_engine(
+    os.environ.get("DATABASE_URL"), connect_args={"check_same_thread": False}
+)
 
 contact_type = Table(
     "contact_type",
