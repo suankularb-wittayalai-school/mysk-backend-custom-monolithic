@@ -1,0 +1,43 @@
+type Contact {
+    id: ID!
+    name: String!
+    type: "Phone" | "Email" | "Facebook" | "Instagram" | "Twitter" | "Website" | "Discord" | "Other"
+    value: String!
+}
+
+type Person {
+    id: ID!
+    prefix_th: "นาย" | "นางสาว" | "นาง" | "เด็กชาย"
+    prefix_en: "Mr." | "Mrs." | "Ms." | "Master"
+    first_name_th: String!
+    first_name_en: String!
+    middle_name_th: String
+    middle_name_en: String
+    last_name_th: String!
+    last_name_en: String!
+    birthdate: Date!
+    citizen_id: String!
+    contacts: [Contact]!
+}
+
+type Teacher {
+    id: ID!
+    people: Person!
+    teacher_id: String!
+    subjectGroup: SubjectGroup!
+}
+
+type Student {
+    id: ID!
+    people: Person!
+    student_id: String!
+}
+
+type query {
+    teachers: [Teacher]!
+    students: [Student]!
+    teacher: Teacher
+    student: Student
+    person: Person
+    people: [Person]!
+}
