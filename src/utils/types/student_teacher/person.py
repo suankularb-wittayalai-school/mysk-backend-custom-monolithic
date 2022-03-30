@@ -3,10 +3,10 @@ from typing import List, Optional
 from datetime import datetime, date
 from enum import Enum, IntEnum
 
-from student_teacher.contacts import Contact
+from .contacts import Contact, QueryContact
 
 
-class ThaiPrefix(str, Enum):
+class ThaiPrefix(Enum):
     """
     Thai prefix for name
     """
@@ -17,7 +17,7 @@ class ThaiPrefix(str, Enum):
     Miss = "นางสาว"
 
 
-class EnglishPrefix(str, Enum):
+class EnglishPrefix(Enum):
     """
     English prefix for name
     """
@@ -41,3 +41,17 @@ class Person(BaseModel):
     birthdate: date
     citizen_id: str
     contact: List[Contact]
+
+
+class QueryPerson(BaseModel):
+    prefix_th: ThaiPrefix
+    prefix_en: EnglishPrefix
+    first_name_th: str
+    last_name_th: str
+    middle_name_th: Optional[str]
+    first_name_en: str
+    last_name_en: str
+    middle_name_en: Optional[str]
+    birthdate: date
+    citizen_id: str
+    contact: List[QueryContact]

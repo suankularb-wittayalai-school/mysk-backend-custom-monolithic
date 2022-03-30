@@ -4,7 +4,7 @@ from datetime import datetime, date
 from enum import Enum, IntEnum
 
 
-class ContactType(str, Enum):
+class ContactType(Enum):
     """
     Contact type
     """
@@ -21,6 +21,12 @@ class ContactType(str, Enum):
 
 class Contact(BaseModel):
     id: str
+    name: str
+    type: ContactType
+    value: str
+
+
+class QueryContact(BaseModel):
     name: str
     type: ContactType
     value: str
