@@ -1,5 +1,5 @@
-from student_teacher.student import Student
-from student_teacher.teacher import Teacher
+from ..student_teacher.student import Student
+from ..student_teacher.teacher import Teacher
 
 
 from pydantic import BaseModel
@@ -51,8 +51,9 @@ class User(BaseModel):
     created_at: datetime
     updated_at: datetime
 
-
-    
-
-    
+class QueryUser(BaseModel):
+    password : str
+    email: str
+    role: RoleChoice
+    std_id: str
     
