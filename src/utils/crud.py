@@ -87,5 +87,7 @@ def register_student(db: Session, query: user.QueryUser):
 			student=std
 		)
 		db.add(user)
+		db.commit()
+		db.refresh(user)
 		return user
 	return {"success":False}
