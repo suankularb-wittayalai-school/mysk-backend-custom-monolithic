@@ -57,3 +57,7 @@ class QueryUser(BaseModel):
     role: RoleChoice
     std_id: str
     
+class QueryLogin(BaseModel):
+    username: str
+    password: str
+    

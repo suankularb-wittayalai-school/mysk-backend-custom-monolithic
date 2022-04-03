@@ -4,23 +4,16 @@ from sqlalchemy.orm import relationship
 from .database import Base
 from datetime import datetime
 
-class ContactType(Base):
-	__tablename__ = "contact_type"
-
-	id = Column(Integer, primary_key=True, index=True)
-	name = Column(String(50), nullable=False)
-
-
 class Contact(Base):
 	__tablename__ = "contact"
 
 	id = Column(Integer, primary_key=True)
 	name = Column(String(50), nullable=False)
-	type_id = Column(Integer, ForeignKey("contact_type.id"))
 	value = Column(String(50), nullable=False)
 	person = Column(Integer, ForeignKey("person.id"))
 
-	contact_type = relationship("ContactType", backref="ctc", uselist=False)
+	room_id = Column(Integer, ForeignKey("classroom.id"))
+	contact_type = Column(String(50), nullable=False)
 
 class Person(Base):
 	__tablename__ = "person"
@@ -36,7 +29,7 @@ class Person(Base):
 	last_name_en = Column(String)
 	birthdate = Column(DateTime)
 	citizen_id = Column(String)
-
+	
 	contact_list = relationship("Contact", backref="contacts")
 	student_assigned = relationship("Student", backref="student_extends", uselist=False)
 	teacher_assigned = relationship("Teacher", backref="teacher_extends", uselist=False)
@@ -46,12 +39,16 @@ class Student(Base):
 	id = Column(Integer, primary_key=True)
 	person_id = Column(Integer, ForeignKey("person.id"))
 	student_id = Column(String)
+	room_id = Column(Integer, ForeignKey("classroom.id"))
 
 class Teacher(Base):
 	__tablename__ = "teacher"
 	id = Column(Integer, primary_key=True)
 	person_id = Column(Integer, ForeignKey("person.id"))
 	teacher_id = Column(String)
+	room_id = Column(Integer, ForeignKey("classroom.id"))
+
+
 
 class User(Base):
 	__tablename__ = "user"
@@ -74,3 +71,21 @@ class User(Base):
 
 	student = relationship("Student", backref="user_assigned", uselist=False)
 	teacher = relationship("Teacher", backref="user_assigned", uselist=False)
+
+class Classroom(Base):
+	__tablename__ = "classroom"
+	id = Column(Integer, primary_key=True)
+	room_number = Column(String)
+	year = Column(Integer)
+	semester = Column(Integer)
+
+	students = relationship("Student", backref="room_assigned")
+	advisors = relationship("Teacher", backref="room_assigned")
+	contacts = relationship("Contact", backref="room_assigned")
+
+class Schedule(Base):
+	__tablename__ = "schedule"
+	id = Column(Integer, primary_key=True)
+	# schedule_rows = relationship("ScheduleRow", "schedule_table_assigned")
+	year = Column(Integer)
+	semester = Column(Integer)

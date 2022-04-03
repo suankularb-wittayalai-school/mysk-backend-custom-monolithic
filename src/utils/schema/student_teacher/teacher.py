@@ -1,4 +1,4 @@
-from ..student_teacher.person import Person
+from ..student_teacher.person import *
 
 from pydantic import BaseModel
 from typing import List, Optional
@@ -15,3 +15,8 @@ class Teacher(BaseModel):
     people: Person
     teacher_id: str
     subject_groups: List[SubjectGroup]
+
+class QueryTeacher(QueryPerson):
+    prefix_th: ThaiPrefix
+    prefix_en: EnglishPrefix
+    teacher_id: str
