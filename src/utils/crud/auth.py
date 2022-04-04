@@ -9,7 +9,7 @@ from utils.schema.auth import user
 
 def register_student(db: Session, query: user.QueryUser):
 	std = db.query(models.Student).filter(models.Student.student_id == query.std_id).first()
-	if std is not None and std.user_assigned == []:
+	if std is not None and not std.user_assigned:
 		ph = PasswordHasher()
 		user = models.User(
 			password=ph.hash(query.password),
@@ -20,12 +20,14 @@ def register_student(db: Session, query: user.QueryUser):
 		db.add(user)
 		db.commit()
 		db.refresh(user)
-		return user
-	return {"success":False}
+		return 1
+	if std is not None and std.user_assigned:
+		return -1
+	return 0
 
 def register_teacher(db: Session, query: user.QueryUserTeacher):
 	teacher = db.query(models.Teacher).filter(models.Teacher.teacher_id == query.teacher_id).first()
-	if teacher is not None and teacher.user_assigned == []:
+	if teacher is not None and not teacher.user_assigned:
 		ph = PasswordHasher()
 		user = models.User(
 			password=ph.hash(query.password),
@@ -36,8 +38,10 @@ def register_teacher(db: Session, query: user.QueryUserTeacher):
 		db.add(user)
 		db.commit()
 		db.refresh(user)
-		return user
-	return {"success":False}
+		return 1
+	if teacher is not None and teacher.user_assigned:
+		return -1
+	return 0
 
 def login(db: Session, query: user.QueryLogin):
 	ph = PasswordHasher()

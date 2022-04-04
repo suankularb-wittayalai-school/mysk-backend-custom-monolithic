@@ -31,13 +31,13 @@ def get_student(db: Session, std_id: str):
 	person = db.query(models.Student).filter(models.Student.student_id == std_id).first()
 	if person is not None:
 		return person.student_extends
-	return {"success":False}
+	return 0
 
 def get_student_contacts(db: Session, std_id: str):
 	std = db.query(models.Student).filter(models.Student.student_id == std_id).first()
 	if std is not None:
 		return [{"name": i.name, "type":i.contact_type, "value": i.value} for i in std.student_extends.contact_list]
-	return {"success":False}
+	return 0
 
 def update_student_contacts(db: Session, std_id: str, contact: List[contacts.QueryContact]):
 	std = db.query(models.Student).filter(models.Student.student_id == std_id).first()
@@ -52,8 +52,8 @@ def update_student_contacts(db: Session, std_id: str, contact: List[contacts.Que
 			person.contact_list.append(ctc)
 		db.commit()
 		db.query(models.Contact).filter(models.Contact.person == None).delete(); db.commit()
-		return {"success":True}
-	return {"success":False}
+		return 1
+	return 0
 
 def create_teacher(db: Session, teacher: teacher.QueryTeacher):
 	a = teacher.dict()
@@ -79,13 +79,12 @@ def get_teacher(db: Session, teacher_id: str):
 	person = db.query(models.Teacher).filter(models.Teacher.teacher_id == teacher_id).first()
 	if person is not None:
 		return person.teacher_extends
-	return {"success":False}
-
+	return 0
 def get_teacher_contacts(db: Session, teacher_id: str):
 	tch = db.query(models.Teacher).filter(models.Teacher.teacher_id == teacher_id).first()
 	if tch is not None:
 		return [{"name": i.name, "type":i.contact_type, "value": i.value} for i in tch.teacher_extends.contact_list]
-	return {"success":False}
+	return 0
 
 def update_teacher_contacts(db: Session, teacher_id: str, contact: List[contacts.QueryContact]):
 	tch = db.query(models.Teacher).filter(models.Teacher.teacher_id == teacher_id).first()
@@ -100,5 +99,5 @@ def update_teacher_contacts(db: Session, teacher_id: str, contact: List[contacts
 			person.contact_list.append(ctc)
 		db.commit()
 		db.query(models.Contact).filter(models.Contact.person == None).delete(); db.commit()
-		return {"success":True}
-	return {"success":False}
+		return 1
+	return 0
