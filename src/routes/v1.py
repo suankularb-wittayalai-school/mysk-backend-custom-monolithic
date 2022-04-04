@@ -31,6 +31,10 @@ def get_user(query: user.QueryLogin, db: Session = Depends(get_db)):
 def create_student(query: user.QueryUser, db: Session = Depends(get_db)):
     return crud.register_student(db, query)
 
+@V1.post("/auth/teacher/register", tags=["auth"])
+def create_student(query: user.QueryUserTeacher, db: Session = Depends(get_db)):
+    return crud.register_teacher(db, query)
+
 @V1.post("/auth/token", tags=["auth"])
 def login(query: user.QueryLogin, db: Session = Depends(get_db)):
     user = get_user(db=db, query=query)

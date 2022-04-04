@@ -56,7 +56,13 @@ class QueryUser(BaseModel):
     email: str
     role: RoleChoice
     std_id: str
-    
+
+class QueryUserTeacher(BaseModel):
+    password : str
+    email: str
+    role: RoleChoice
+    teacher_id: str
+
 class QueryLogin(BaseModel):
     username: str
     password: str

@@ -106,7 +106,7 @@ def update_teacher_contacts(db: Session, teacher_id: str, contact: List[contacts
 
 def register_student(db: Session, query: user.QueryUser):
 	std = db.query(models.Student).filter(models.Student.student_id == query.std_id).first()
-	if std is not None and std.user_assigned is None:
+	if std is not None and std.user_assigned == []:
 		ph = PasswordHasher()
 		user = models.User(
 			password=ph.hash(query.password),
@@ -120,18 +120,44 @@ def register_student(db: Session, query: user.QueryUser):
 		return user
 	return {"success":False}
 
+def register_teacher(db: Session, query: user.QueryUserTeacher):
+	teacher = db.query(models.Teacher).filter(models.Teacher.teacher_id == query.teacher_id).first()
+	if teacher is not None and teacher.user_assigned == []:
+		ph = PasswordHasher()
+		user = models.User(
+			password=ph.hash(query.password),
+			email=query.email,
+			role=query.role.value,
+			teacher=teacher
+		)
+		db.add(user)
+		db.commit()
+		db.refresh(user)
+		return user
+	return {"success":False}
+
 def login(db: Session, query: user.QueryLogin):
 	ph = PasswordHasher()
 	std = db.query(models.User) \
 		.join(models.Student) \
 		.filter(models.User.student, 
 				(models.Student.student_id == query.username) | (models.User.email == query.username)).first()
+	teacher = db.query(models.User) \
+		.join(models.Teacher) \
+		.filter(models.User.teacher, 
+				(models.Teacher.teacher_id == query.username) | (models.User.email == query.username)).first()
 	if std:
 		try:
 			ph.verify(std.password, query.password)
 			return std
 		except VerificationError:
-			return 0
+			return 0 
+	elif teacher:
+		try:
+			ph.verify(teacher.password, query.password)
+			return teacher
+		except VerificationError:
+			return 0 
 	return 0
 
 
