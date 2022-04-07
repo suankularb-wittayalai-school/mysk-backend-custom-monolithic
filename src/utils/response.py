@@ -4,6 +4,7 @@ from enum import Enum
 
 class InternalCode(Enum):
 	IC_GENERIC_SUCCESS = 2000
+	IC_OBJECT_DELETED = 2008
 	IC_OBJECT_UPDATED = 2009
 	IC_OBJECT_CREATED = 2011
 	IC_GENERIC_REDIRECT = 3000
@@ -19,6 +20,9 @@ class InternalCode(Enum):
 	IC_ADMIN_ONLY = 4033
 	IC_OBJECT_NOT_FOUND = 4041
 	IC_GENERIC_SERVER_ERROR = 5000
+	IC_GENERIC_NOT_IMPLEMENTED = 5010
+	IC_FOR_FUTURE_IMPLEMENTATION = 5011
+	IC_DROPPED_SUPPORT = 5019
 
 def APIResponse(status_code: int, internal_code: InternalCode, success: bool = True, body: dict = {}, detail: str = "", headers: dict = {}):
 	return JSONResponse(status_code=status_code, 

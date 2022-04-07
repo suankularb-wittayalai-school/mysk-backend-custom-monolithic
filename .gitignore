@@ -131,3 +131,4 @@ dmypy.json
 *.db
 .anaconda
 alembic/versions/*
+alembic.ini
