@@ -41,8 +41,8 @@ def get_student_from_std_id(std_id: str, db: Session = Depends(get_db)):
 def create_student(person: student.QueryStudent, db: Session = Depends(get_db)):
     response = people.create_student(db, person)
     return APIResponse(status_code=201, internal_code=ic.IC_OBJECT_CREATED, body={
-            "prefix_th":response.prefix_th,
-            "prefix_en":response.prefix_en,
+            "prefix_th":response.prefix_th.value,
+            "prefix_en":response.prefix_en.value,
             "first_name_th":response.first_name_th,
             "middle_name_th":response.middle_name_th,
             "last_name_th":response.last_name_th,
@@ -57,9 +57,9 @@ def create_student(person: student.QueryStudent, db: Session = Depends(get_db)):
 @PEOPLE.get("/student/contacts/{std_id}")
 def get_student_contacts(std_id: str, db: Session = Depends(get_db)):
     response = people.get_student_contacts(db, std_id)
-    if response:
+    if response != 0:
         return APIResponse(status_code=200, internal_code=ic.IC_GENERIC_SUCCESS, body=response)
-    raise APIResponse(success=False, status_code=404, internal_code=ic.IC_OBJECT_NOT_FOUND, detail="object_not_found")
+    return APIResponse(success=False, status_code=404, internal_code=ic.IC_OBJECT_NOT_FOUND, detail="object_not_found")
 
 @PEOPLE.post("/student/contacts/update")
 def update_student_contacts(std_id: str, contact: List[contacts.QueryContact], db: Session = Depends(get_db)):
@@ -89,9 +89,9 @@ def get_teacher_from_teacher_id(teacher_id: str, db: Session = Depends(get_db)):
 @PEOPLE.post("/teacher/add")
 def create_teacher(person: teacher.QueryTeacher, db: Session = Depends(get_db)):
     response = people.create_teacher(db, person)
-    return APIResponse(status_code=201, content={
-            "prefix_th":response.prefix_th,
-            "prefix_en":response.prefix_en,
+    return APIResponse(status_code=201, internal_code=ic.IC_OBJECT_CREATED, body={
+            "prefix_th":response.prefix_th.value,
+            "prefix_en":response.prefix_en.value,
             "first_name_th":response.first_name_th,
             "middle_name_th":response.middle_name_th,
             "last_name_th":response.last_name_th,
@@ -106,16 +106,16 @@ def create_teacher(person: teacher.QueryTeacher, db: Session = Depends(get_db)):
 @PEOPLE.get("/teacher/contacts/{teacher_id}")
 def get_teacher_contacts(teacher_id: str, db: Session = Depends(get_db)):
     response = people.get_teacher_contacts(db, teacher_id)
-    if response:
+    if response != 0:
         return APIResponse(status_code=200, internal_code=ic.IC_GENERIC_SUCCESS, body=response)
-    raise APIResponse(success=False, status_code=404, internal_code=ic.IC_OBJECT_NOT_FOUND, detail="object_not_found")
+    return APIResponse(success=False, status_code=404, internal_code=ic.IC_OBJECT_NOT_FOUND, detail="object_not_found")
 
 @PEOPLE.post("/teacher/contacts/update")
 def update_teacher_contacts(teacher_id: str, contact: List[contacts.QueryContact], db: Session = Depends(get_db)):
     response = people.update_teacher_contacts(db, teacher_id, contact)
     if response:
         return APIResponse(status_code=200, internal_code=ic.IC_OBJECT_UPDATED, body=contact)
-    raise APIResponse(success=False, status_code=404, internal_code=ic.IC_OBJECT_NOT_FOUND, detail="object_not_found")
+    return APIResponse(success=False, status_code=404, internal_code=ic.IC_OBJECT_NOT_FOUND, detail="object_not_found")
 
 # @PEOPLE.get("/test")
 # def test(db: Session = Depends(get_db)):

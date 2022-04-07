@@ -26,6 +26,25 @@ def create_classroom(query: QueryClassroom, db: Session = Depends(get_db)):
 			"semester": response.semester
 		})
 
+@CLASSROOM.post("/{room_number}/student/add")
+def add_student_to_classroom(room_number: str, db: Session = Depends(get_db)):
+	pass
+
+@CLASSROOM.get("/{room_number}/advisor")
+def read_advisors(room_number: str, db: Session = Depends(get_db)):
+	response = classroom.read_advisors(db, room_number)
+	print(response)
+	if response != 0:
+		return APIResponse(status_code=200, internal_code=ic.IC_GENERIC_SUCCESS, body=response)
+	return APIResponse(success=False, status_code=404, internal_code=ic.IC_OBJECT_NOT_FOUND, detail="object_not_found")
+
+@CLASSROOM.post("/{room_number}/advisor/update")
+def update_advisor_in_classroom(room_number: str, teacher_id: List[str], db: Session = Depends(get_db)):
+	response = classroom.update_advisor_in_classroom(db, room_number, teacher_id)
+	if response != 0:
+		return APIResponse(status_code=200, internal_code=ic.IC_OBJECT_UPDATED)
+	return APIResponse(success=False, status_code=404, internal_code=ic.IC_OBJECT_NOT_FOUND, detail="object_not_found")
+
 @CLASSROOM.get("/{room_number}")
 def read_classroom(room_number: str):
 	return APIResponse(success=False, status_code=501, internal_code=ic.IC_FOR_FUTURE_IMPLEMENTATION, detail="for_future_implementation")
