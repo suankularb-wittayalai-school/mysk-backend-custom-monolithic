@@ -2,13 +2,13 @@ from enum import Enum
 from pydantic import BaseModel
 from typing import List, Optional
 
-from student_teacher.teacher import Teacher
-from student_teacher.student import Student
+from utils.schema.student_teacher.teacher import Teacher
+from utils.schema.student_teacher.student import Student
 
-from schedule.schedule import Schedule
-from student_teacher.contacts import Contact
+from utils.schema.schedule.schedule import Schedule
+from utils.schema.student_teacher.contacts import Contact
 
-from subject.room_subject import RoomSubject
+from utils.schema.subject.room_subject import RoomSubject
 
 
 class Classroom(BaseModel):
@@ -21,3 +21,8 @@ class Classroom(BaseModel):
     schedule: Schedule
     contacts: List[Contact]
     subjects: List[RoomSubject]
+
+class QueryClassroom(BaseModel):
+    room_number: str
+    year: int
+    semester: int

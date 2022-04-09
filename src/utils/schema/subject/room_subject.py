@@ -2,8 +2,8 @@ from enum import Enum
 from pydantic import BaseModel
 from typing import List, Optional
 
-from student_teacher.teacher import Teacher
-from subject.subjects import Subject
+from utils.schema.student_teacher.teacher import Teacher
+from utils.schema.subject.subjects import Subject
 
 
 class RoomSubject(BaseModel):

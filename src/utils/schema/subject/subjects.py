@@ -2,8 +2,8 @@ from enum import Enum
 from pydantic import BaseModel
 from typing import List, Optional
 
-from student_teacher.teacher import Teacher
-from subject.subject_group import SubjectGroup
+from utils.schema.student_teacher.teacher import Teacher
+from utils.schema.subject.subject_group import SubjectGroup
 
 class SubjectTypesTH(str, Enum):
     """

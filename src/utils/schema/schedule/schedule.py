@@ -2,7 +2,7 @@ from enum import Enum
 from pydantic import BaseModel
 from typing import List, Optional
 
-from schedule.scheduleItem import ScheduleItem
+from utils.schema.schedule.scheduleItem import ScheduleItem
 
 class ScheduleRow(BaseModel):
     id: int
