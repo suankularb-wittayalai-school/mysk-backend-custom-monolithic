@@ -1,1 +1,1 @@
-# mysk-backend-people
+# mysk-backend-custom-monolithic
