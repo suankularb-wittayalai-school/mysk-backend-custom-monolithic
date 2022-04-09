@@ -14,7 +14,6 @@ load_dotenv()
 
 app = FastAPI()
 
-cors = CORSMiddleware(app, allow_origins=["*"])
 
 @app.get("/")
 def health_check():
@@ -26,4 +25,9 @@ app.include_router(people.PEOPLE, prefix="/api/v1/people", tags=["people"])
 app.include_router(subject.SUBJECT, prefix="/api/v1/subject", tags=["subject"])
 
 if __name__ == "__main__":
-    uvicorn.run("app:app", host=os.environ.get("HOST"), port=int(os.environ.get("PORT")), reload=True)
+    uvicorn.run(
+        "app:app",
+        host=os.environ.get("HOST"),
+        port=int(os.environ.get("PORT")),
+        reload=True,
+    )
